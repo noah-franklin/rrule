@@ -28,7 +28,7 @@ export type DateFormatter = (year: number, month: string, day: number) => string
 const defaultDateFormatter: DateFormatter = (
   year: number,
   month: string,
-  day: number,
+  day: number
 ) => `${month} ${day}, ${year}`
 
 /**
@@ -60,7 +60,7 @@ export default class ToText {
     rrule: RRule,
     gettext: GetText = defaultGetText,
     language: Language = ENGLISH,
-    dateFormatter: DateFormatter = defaultDateFormatter,
+    dateFormatter: DateFormatter = defaultDateFormatter
   ) {
     this.text = []
     this.language = language || ENGLISH
@@ -88,7 +88,7 @@ export default class ToText {
 
       if (this.origOptions.bysetpos) {
         byweekday.forEach((weekday: Weekday) =>
-          weekday.nth(Number(this.origOptions.bysetpos)),
+          weekday.nth(Number(this.origOptions.bysetpos))
         )
       }
       const days = String(byweekday)
@@ -182,14 +182,14 @@ export default class ToText {
         this.dateFormatter(
           until.getUTCFullYear(),
           this.language.monthNames[until.getUTCMonth()],
-          until.getUTCDate(),
-        ),
+          until.getUTCDate()
+        )
       )
     } else if (this.options.count) {
       this.add(gettext('for'))
         .add(this.options.count.toString())
         .add(
-          this.plural(this.options.count) ? gettext('times') : gettext('time'),
+          this.plural(this.options.count) ? gettext('times') : gettext('time')
         )
     }
 
@@ -204,7 +204,7 @@ export default class ToText {
     if (this.options.interval !== 1) this.add(this.options.interval.toString())
 
     this.add(
-      this.plural(this.options.interval) ? gettext('hours') : gettext('hour'),
+      this.plural(this.options.interval) ? gettext('hours') : gettext('hour')
     )
   }
 
@@ -216,7 +216,7 @@ export default class ToText {
     this.add(
       this.plural(this.options.interval)
         ? gettext('minutes')
-        : gettext('minute'),
+        : gettext('minute')
     )
   }
 
@@ -229,11 +229,11 @@ export default class ToText {
       this.add(
         this.plural(this.options.interval)
           ? gettext('weekdays')
-          : gettext('weekday'),
+          : gettext('weekday')
       )
     } else {
       this.add(
-        this.plural(this.options.interval) ? gettext('days') : gettext('day'),
+        this.plural(this.options.interval) ? gettext('days') : gettext('day')
       )
     }
 
@@ -256,7 +256,7 @@ export default class ToText {
 
     if (this.options.interval !== 1) {
       this.add(this.options.interval.toString()).add(
-        this.plural(this.options.interval) ? gettext('weeks') : gettext('week'),
+        this.plural(this.options.interval) ? gettext('weeks') : gettext('week')
       )
     }
 
@@ -265,14 +265,14 @@ export default class ToText {
         this.add(
           this.plural(this.options.interval)
             ? gettext('weekdays')
-            : gettext('weekday'),
+            : gettext('weekday')
         )
       } else {
         this.add(gettext('on')).add(gettext('weekdays'))
       }
     } else if (this.byweekday && this.byweekday.isEveryDay) {
       this.add(
-        this.plural(this.options.interval) ? gettext('days') : gettext('day'),
+        this.plural(this.options.interval) ? gettext('days') : gettext('day')
       )
     } else {
       if (this.options.interval === 1) this.add(gettext('week'))
@@ -312,7 +312,7 @@ export default class ToText {
       this.add(
         this.plural(this.options.interval)
           ? gettext('months')
-          : gettext('month'),
+          : gettext('month')
       )
     }
     if (this.bymonthday) {
@@ -340,7 +340,7 @@ export default class ToText {
         this.add(this.options.interval.toString())
       }
       this.add(
-        this.plural(this.options.interval) ? gettext('years') : gettext('year'),
+        this.plural(this.options.interval) ? gettext('years') : gettext('year')
       )
     }
 
@@ -361,7 +361,7 @@ export default class ToText {
         .add(
           this.plural((this.options.byweekno as number[]).length)
             ? gettext('weeks')
-            : gettext('week'),
+            : gettext('week')
         )
         .add(this.list(this.options.byweekno, undefined, gettext('and')))
     }
@@ -372,13 +372,13 @@ export default class ToText {
     if (this.byweekday && this.byweekday.allWeeks) {
       this.add(gettext('on'))
         .add(
-          this.list(this.byweekday.allWeeks, this.weekdaytext, gettext('or')),
+          this.list(this.byweekday.allWeeks, this.weekdaytext, gettext('or'))
         )
         .add(gettext('the'))
         .add(this.list(this.bymonthday, this.nth, gettext('or')))
     } else {
       this.add(gettext('on the')).add(
-        this.list(this.bymonthday, this.nth, gettext('and')),
+        this.list(this.bymonthday, this.nth, gettext('and'))
       )
     }
     // this.add(gettext('DAY'))
@@ -388,7 +388,7 @@ export default class ToText {
     const gettext = this.gettext
     if (this.byweekday.allWeeks && !this.byweekday.isWeekdays) {
       this.add(gettext('on')).add(
-        this.list(this.byweekday.allWeeks, this.weekdaytext),
+        this.list(this.byweekday.allWeeks, this.weekdaytext)
       )
     }
 
@@ -396,7 +396,7 @@ export default class ToText {
       if (this.byweekday.allWeeks) this.add(gettext('and'))
 
       this.add(gettext('on the')).add(
-        this.list(this.byweekday.someWeeks, this.weekdaytext, gettext('and')),
+        this.list(this.byweekday.someWeeks, this.weekdaytext, gettext('and'))
       )
     }
   }
@@ -405,13 +405,13 @@ export default class ToText {
     const gettext = this.gettext
 
     this.add(gettext('at')).add(
-      this.list(this.origOptions.byhour, undefined, gettext('and')),
+      this.list(this.origOptions.byhour, undefined, gettext('and'))
     )
   }
 
   private _bymonth() {
     this.add(
-      this.list(this.options.bymonth, this.monthtext, this.gettext('and')),
+      this.list(this.options.bymonth, this.monthtext, this.gettext('and'))
     )
   }
 
@@ -470,7 +470,7 @@ export default class ToText {
     arr: ByWeekday | ByWeekday[],
     callback?: GetText,
     finalDelim?: string,
-    delim = ',',
+    delim = ','
   ) {
     if (!isArray(arr)) {
       arr = [arr]
@@ -478,7 +478,7 @@ export default class ToText {
     const delimJoin = function (
       array: string[],
       delimiter: string,
-      finalDelimiter: string,
+      finalDelimiter: string
     ) {
       let list = ''
 
